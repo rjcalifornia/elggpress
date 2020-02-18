@@ -21,7 +21,7 @@ if (!$excerpt) {
 
 $owner_icon = elgg_view_entity_icon($owner, 'tiny');
 
-$vars['owner_url'] = "blog/owner/$owner->username";
+$vars['owner_url'] = "posts/owner/$owner->username";
 $by_line = elgg_view('page/elements/by_line', $vars);
 
 // The "on" status changes for comments, so best to check for !Off
@@ -49,7 +49,7 @@ if (!elgg_in_context('widgets')) {
 	// only show entity menu outside of widgets
 	$metadata = elgg_view_menu('entity', array(
 		'entity' => $vars['entity'],
-		'handler' => 'blog',
+		'handler' => 'posts',
 		'sort_by' => 'priority',
 		'class' => 'elgg-menu-hz',
 	));

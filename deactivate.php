@@ -3,4 +3,4 @@
  * Deregister the ElggBlog class
  */
 
-update_subtype('object', 'elggpress');
+update_subtype('object', 'posts');

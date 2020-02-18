@@ -27,7 +27,7 @@ $guid = get_input('guid');
 
 if ($guid) {
 	$entity = get_entity($guid);
-	if (elgg_instanceof($entity, 'object', 'blog') && $entity->canEdit()) {
+	if (elgg_instanceof($entity, 'object', 'posts') && $entity->canEdit()) {
 		$blog = $entity;
 	} else {
 		register_error(elgg_echo('blog:error:post_not_found'));
@@ -39,7 +39,7 @@ if ($guid) {
 	$new_post = $blog->new_post;
 } else {
 	$blog = new ElggBlog();
-	$blog->subtype = 'blog';
+	$blog->subtype = 'posts';
 	$new_post = TRUE;
 }
 

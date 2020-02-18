@@ -22,7 +22,7 @@ function elggpress_init() {
 	elgg_register_library('elgg:elggpress', __DIR__ . '/lib/elggpress.php');
 
 	// add a site navigation item
-	$item = new ElggMenuItem('elggpress', elgg_echo('elggpress:blogs'), 'posts/all');
+	$item = new ElggMenuItem('posts', elgg_echo('elggpress:blogs'), 'posts/all');
 	elgg_register_menu_item('site', $item);
 
 	elgg_register_event_handler('upgrade', 'upgrade', 'elggpress_run_upgrades');
@@ -37,8 +37,8 @@ function elggpress_init() {
 	elgg_register_plugin_hook_handler('entity:url', 'object', 'elggpress_set_url');
 
 	// notifications
-	elgg_register_notification_event('object', 'blog', array('publish'));
-	elgg_register_plugin_hook_handler('prepare', 'notification:publish:object:blog', 'blog_prepare_notification');
+	elgg_register_notification_event('object', 'posts', array('publish'));
+	elgg_register_plugin_hook_handler('prepare', 'notification:publish:object:blog', 'elggpress_prepare_notification');
 
 	// add blog link to
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'blog_owner_block_menu');
@@ -48,7 +48,7 @@ function elggpress_init() {
 	//elgg_register_plugin_hook_handler('pingback:object:subtypes', 'object', 'blog_pingback_subtypes');
 
 	// Register for search.
-	elgg_register_entity_type('object', 'blog');
+	elgg_register_entity_type('object', 'posts');
 
 	// Add group option
 	add_group_tool_option('blog', elgg_echo('blog:enableblog'), true);
@@ -109,24 +109,24 @@ function elggpress_page_handler($page) {
 		case 'owner':
 			$resource_vars['username'] = elgg_extract(1, $page);
 			
-			echo elgg_view_resource('blog/owner', $resource_vars);
+			echo elgg_view_resource('posts/owner', $resource_vars);
 			break;
 		case 'friends':
 			$resource_vars['username'] = elgg_extract(1, $page);
 			
-			echo elgg_view_resource('blog/friends', $resource_vars);
+			echo elgg_view_resource('posts/friends', $resource_vars);
 			break;
 		case 'archive':
 			$resource_vars['username'] = elgg_extract(1, $page);
 			$resource_vars['lower'] = elgg_extract(2, $page);
 			$resource_vars['upper'] = elgg_extract(3, $page);
 			
-			echo elgg_view_resource('blog/archive', $resource_vars);
+			echo elgg_view_resource('posts/archive', $resource_vars);
 			break;
 		case 'view':
 			$resource_vars['guid'] = elgg_extract(1, $page);
 			
-			echo elgg_view_resource('blog/view', $resource_vars);
+			echo elgg_view_resource('posts/view', $resource_vars);
 			break;
 		case 'add':
 			$resource_vars['guid'] = elgg_extract(1, $page);
@@ -137,7 +137,7 @@ function elggpress_page_handler($page) {
 			$resource_vars['guid'] = elgg_extract(1, $page);
 			$resource_vars['revision'] = elgg_extract(2, $page);
 			
-			echo elgg_view_resource('blog/edit', $resource_vars);
+			echo elgg_view_resource('posts/edit', $resource_vars);
 			break;
 		case 'group':
 			$resource_vars['group_guid'] = elgg_extract(1, $page);
@@ -168,9 +168,9 @@ function elggpress_page_handler($page) {
  */
 function elggpress_set_url($hook, $type, $url, $params) {
 	$entity = $params['entity'];
-	if (elgg_instanceof($entity, 'object', 'blog')) {
+	if (elgg_instanceof($entity, 'object', 'posts')) {
 		$friendly_title = elgg_get_friendly_title($entity->title);
-		return "blog/view/{$entity->guid}/$friendly_title";
+		return "posts/view/{$entity->guid}/$friendly_title";
 	}
 }
 
@@ -180,7 +180,7 @@ function elggpress_set_url($hook, $type, $url, $params) {
 function elggpress_owner_block_menu($hook, $type, $return, $params) {
 	$entity = elgg_extract('entity', $params);
 	if ($entity instanceof ElggUser) {
-		$url = "blog/owner/{$entity->username}";
+		$url = "posts/owner/{$entity->username}";
 		$return[] = new ElggMenuItem('blog', elgg_echo('blog'), $url);
 
 	} elseif ($entity instanceof ElggGroup) {
@@ -260,7 +260,7 @@ function elggpress_prepare_notification($hook, $type, $notification, $params) {
  * Register blogs with ECML.
  */
 function elggpress_ecml_views_hook($hook, $entity_type, $return_value, $params) {
-	$return_value['object/blog'] = elgg_echo('blog:blogs');
+	$return_value['object/posts'] = elgg_echo('blog:blogs');
 
 	return $return_value;
 }
@@ -274,8 +274,8 @@ function elggpress_run_upgrades($event, $type, $details) {
 	if (!$blog_upgrade_version) {
 		 // When upgrading, check if the ElggBlog class has been registered as this
 		 // was added in Elgg 1.8
-		if (!update_subtype('object', 'blog', 'ElggBlog')) {
-			add_subtype('object', 'blog', 'ElggBlog');
+		if (!update_subtype('object', 'posts', 'ElggBlog')) {
+			add_subtype('object', 'posts', 'ElggBlog');
 		}
 
 		elgg_set_plugin_setting('upgrade_version', 1, 'blogs');

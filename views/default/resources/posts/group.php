@@ -12,7 +12,7 @@ elgg_group_gatekeeper();
 $group = get_entity($group_guid);
 
 if (!isset($subpage) || $subpage == 'all') {
-	$params = blog_get_page_content_list($group_guid);
+	$params = elggpress_get_page_content_list($group_guid);
 } else {
 	$params = blog_get_page_content_archive($group_guid, $lower, $upper);
 }

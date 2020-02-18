@@ -4,7 +4,7 @@ $page_type = elgg_extract('page_type', $vars);
 
 $params = elggpress_get_page_content_list();
 
-$params['sidebar'] = elgg_view('blog/sidebar', ['page' => $page_type]);
+$params['sidebar'] = elgg_view('elggpress/sidebar', ['page' => $page_type]);
 
 $body = elgg_view_layout('content', $params);
 

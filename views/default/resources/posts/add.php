@@ -11,7 +11,7 @@ elgg_group_gatekeeper(true, $guid);
 $container = get_entity($guid);
 
 // Make sure user has permissions to add to container
-if (!$container->canWriteToContainer(0, 'object', 'blog')) {
+if (!$container->canWriteToContainer(0, 'object', 'posts')) {
 	register_error(elgg_echo('actionunauthorized'));
 	forward(REFERER);
 }
@@ -19,9 +19,9 @@ if (!$container->canWriteToContainer(0, 'object', 'blog')) {
 $params = blog_get_page_content_edit('add', $guid);
 
 if (isset($params['sidebar'])) {
-	$params['sidebar'] .= elgg_view('blog/sidebar', ['page' => $page_type]);
+	$params['sidebar'] .= elgg_view('elggpress/sidebar', ['page' => $page_type]);
 } else {
-	$params['sidebar'] = elgg_view('blog/sidebar', ['page' => $page_type]);
+	$params['sidebar'] = elgg_view('elggpress/sidebar', ['page' => $page_type]);
 }
 
 $body = elgg_view_layout('content', $params);

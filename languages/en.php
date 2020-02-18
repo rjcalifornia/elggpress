@@ -1,14 +1,14 @@
 <?php
 return array(
-	'blog' => 'Blogs',
-	'blog:blogs' => 'Blogs',
+	'blog' => 'Posts',
+	'elggpress:blogs' => 'Posts',
 	'blog:revisions' => 'Revisions',
 	'blog:archives' => 'Archives',
 	'blog:blog' => 'Blog',
 	'item:object:blog' => 'Blogs',
 
-	'blog:title:user_blogs' => '%s\'s blogs',
-	'blog:title:all_blogs' => 'All site blogs',
+	'elggpress:title:user_blogs' => '%s\'s blogs',
+	'elggpress:title:all_blogs' => 'All site posts',
 	'blog:title:friends' => 'Friends\' blogs',
 
 	'blog:group' => 'Group blog',

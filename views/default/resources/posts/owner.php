@@ -7,7 +7,7 @@ $user = get_user_by_username($username);
 if (!$user) {
 	forward('', '404');
 }
-$params = blog_get_page_content_list($user->guid);
+$params = elggpress_get_page_content_list($user->guid);
 
 $params['sidebar'] = elgg_view('blog/sidebar', ['page' => $page_type]);
 

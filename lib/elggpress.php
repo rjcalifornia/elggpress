@@ -38,7 +38,7 @@ function elggpress_get_page_content_list($container_guid = NULL) {
 		} else {
 			$options['owner_guid'] = $container_guid;
 		}
-		$return['title'] = elgg_echo('blog:title:user_blogs', array($container->name));
+		$return['title'] = elgg_echo('elggpress:title:user_blogs', array($container->name));
 
 		$crumbs_title = $container->name;
 		elgg_push_breadcrumb($crumbs_title);
@@ -54,9 +54,9 @@ function elggpress_get_page_content_list($container_guid = NULL) {
 	} else {
 		$options['preload_containers'] = true;
 		$return['filter_context'] = 'all';
-		$return['title'] = elgg_echo('blog:title:all_blogs');
+		$return['title'] = elgg_echo('elggpress:title:all_blogs');
 		elgg_pop_breadcrumb();
-		elgg_push_breadcrumb(elgg_echo('blog:blogs'));
+		elgg_push_breadcrumb(elgg_echo('elggpress:blogs'));
 	}
 
 	elgg_register_title_button('posts', 'add', 'object', 'posts');
@@ -98,7 +98,7 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 
 	$options = array(
 		'type' => 'object',
-		'subtype' => 'blog',
+		'subtype' => 'posts',
 		'full_view' => false,
 		'no_results' => elgg_echo('blog:none'),
 		'preload_owners' => true,
@@ -156,7 +156,7 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 
 		$title = elgg_echo('blog:edit');
 
-		if (elgg_instanceof($blog, 'object', 'blog') && $blog->canEdit()) {
+		if (elgg_instanceof($blog, 'object', 'posts') && $blog->canEdit()) {
 			$vars['entity'] = $blog;
 
 			$title .= ": \"$blog->title\"";

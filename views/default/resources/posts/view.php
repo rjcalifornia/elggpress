@@ -3,7 +3,7 @@
 $page_type = elgg_extract('page_type', $vars);
 $guid = elgg_extract('guid', $vars);
 
-elgg_entity_gatekeeper($guid, 'object', 'blog');
+elgg_entity_gatekeeper($guid, 'object', 'posts');
 elgg_group_gatekeeper();
 
 $blog = get_entity($guid);

@@ -3,8 +3,8 @@
  * Register the ElggBlog class for the object/blog subtype
  */
 
-if (get_subtype_id('object', 'elggpress')) {
-	update_subtype('object', 'elggpress', 'ElggBlog');
+if (get_subtype_id('object', 'posts')) {
+	update_subtype('object', 'posts', 'ElggBlog');
 } else {
-	add_subtype('object', 'elggpress', 'ElggBlog');
+	add_subtype('object', 'posts', 'ElggBlog');
 }
