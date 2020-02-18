@@ -151,7 +151,7 @@ if (!$error) {
 		// because we remove it for drafts.
 		if (($new_post || $old_status == 'draft') && $status == 'published') {
 			elgg_create_river_item(array(
-				'view' => 'river/object/blog/create',
+				'view' => 'river/object/posts/create',
 				'action_type' => 'create',
 				'subject_guid' => $blog->owner_guid,
 				'object_guid' => $blog->getGUID(),
@@ -174,7 +174,7 @@ if (!$error) {
 		if ($blog->status == 'published' || $save == false) {
 			forward($blog->getURL());
 		} else {
-			forward("blog/edit/$blog->guid");
+			forward("posts/edit/$blog->guid");
 		}
 	} else {
 		register_error(elgg_echo('blog:error:cannot_save'));
