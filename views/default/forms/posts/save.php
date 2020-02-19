@@ -98,6 +98,19 @@ $tags_input = elgg_view('input/tags', array(
 	'value' => $vars['tags']
 ));
 
+/**
+Input for uploading an image. Nothing else needs to be done since most of the things are 
+being handled by elgg
+ **/
+
+$featured_label = elgg_echo('elggpress:featured:label');
+$featured_image = elgg_view('input/file', array(
+        'name' => 'featured_image',
+        'label' => 'Select an image to upload',
+        'help' => 'Only jpeg, gif and png images are supported',
+));
+
+
 $access_label = elgg_echo('access');
 $access_input = elgg_view('input/access', array(
 	'name' => 'access_id',
@@ -127,6 +140,11 @@ $draft_warning
 <div>
 	<label for="blog_excerpt">$excerpt_label</label>
 	$excerpt_input
+</div>
+        
+        <div>
+	<label for="featured_image">$featured_label</label>
+	$featured_image
 </div>
 
 <div>

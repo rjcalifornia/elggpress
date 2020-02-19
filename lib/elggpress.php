@@ -139,7 +139,8 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
  * @return array
  */
 function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
-
+//Set the form as multipart so elgg can handle the file
+    $form_vars = array('enctype' => 'multipart/form-data');
 	elgg_require_js('elgg/blog/save_draft');
 
 	$return = array(
@@ -181,7 +182,7 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 			
 			elgg_require_js('elgg/blog/save_draft');
 
-			$content = elgg_view_form('post/save', $vars, $body_vars);
+			$content = elgg_view_form('post/save', $form_vars, $vars, $body_vars);
 			$sidebar = elgg_view('blog/sidebar/revisions', $vars);
 		} else {
 			$content = elgg_echo('blog:error:cannot_edit_post');
@@ -191,7 +192,7 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 		$body_vars = blog_prepare_form_vars(null);
 
 		$title = elgg_echo('blog:add');
-		$content = elgg_view_form('posts/save', $vars, $body_vars);
+		$content = elgg_view_form('posts/save', $form_vars, $vars, $body_vars);
 	}
 
 	$return['title'] = $title;
@@ -208,7 +209,8 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
  * @return array
  */
 function blog_prepare_form_vars($post = NULL, $revision = NULL) {
-
+    
+    
 	// input names => defaults
 	$values = array(
 		'title' => NULL,
@@ -216,6 +218,7 @@ function blog_prepare_form_vars($post = NULL, $revision = NULL) {
 		'status' => 'published',
 		'access_id' => ACCESS_DEFAULT,
 		'comments_on' => 'On',
+                'featured_image' => NULL,
 		'excerpt' => NULL,
 		'tags' => NULL,
 		'container_guid' => NULL,

@@ -61,6 +61,31 @@ $values = array(
 // fail if a required entity isn't set
 $required = array('title', 'description');
 
+$uploaded_files = elgg_get_uploaded_files('featured_image');
+if (!$uploaded_files) {
+        register_error("No file was uploaded");
+        forward(REFERER);
+}
+
+$uploaded_file = array_shift($uploaded_files);
+if (!$uploaded_file->isValid()) {
+        $error = elgg_get_friendly_upload_error($uploaded_file->getError());
+        register_error($error);
+        forward(REFERER);
+}
+/*
+$supported_mimes = [
+        'image/jpeg',
+        'image/png',
+        'image/gif',
+];
+
+$mime_type = ElggFile::detectMimeType($uploaded_file->getPathname(), $uploaded_file->getClientMimeType());
+if (!in_array($mime_type, $supported_mimes)) {
+        register_error("$mime_type is not supported");
+        forward(REFERER);
+}*/
+
 // load from POST and do sanity and access checking
 foreach ($values as $name => $default) {
 	if ($name === 'title') {
@@ -137,6 +162,27 @@ if (!$error) {
 
 		// no longer a brand new post.
 		$blog->deleteMetadata('new_post');
+                
+                                
+$file = new ElggFile();
+$file->title = $file->getFilename();
+$file->subtype = "file";
+$file->category = "featured";
+$file->owner_guid = $blog->getGUID();
+$file->access_id = 2;
+//$file->thumbnail = $file->getIcon('small')->getFilename();
+//$file->smallthumb = $file->getIcon('medium')->getFilename();
+//$file->largethumb = $file->getIcon('large')->getFilename();
+if ($file->acceptUploadedFile($uploaded_file)) {
+        $guid = $file->save(); 
+        $file->save();
+        
+        if ($guid && ($file->getSimpleType() === 'image') && $file->saveIconFromElggFile($file)) {
+		$file->thumbnail = $file->getIcon('small')->getFilename();
+		$file->smallthumb = $file->getIcon('medium')->getFilename();
+		$file->largethumb = $file->getIcon('large')->getFilename();
+	} 
+}
 
 		// if this was an edit, create a revision annotation
 		if (!$new_post && $revision_text) {

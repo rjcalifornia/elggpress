@@ -10,6 +10,7 @@ return array(
 	'elggpress:title:user_blogs' => '%s\'s blogs',
 	'elggpress:title:all_blogs' => 'All site posts',
 	'blog:title:friends' => 'Friends\' blogs',
+        'elggpress:featured:label' => 'Featured image',
 
 	'blog:group' => 'Group blog',
 	'blog:enableblog' => 'Enable group blog',
