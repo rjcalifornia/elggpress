@@ -15,5 +15,10 @@
 		<type>elgg_release</type>
 		<version>1.9</version>
 	</requires>
+        <requires>
+                <name>categories</name>
+		<type>enhancement</type>
+
+	</requires>
 	<activate_on_install>false</activate_on_install>
 </plugin_manifest>
