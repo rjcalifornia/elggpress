@@ -14,7 +14,7 @@ class ElggBlog extends ElggObject {
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "blog";
+		$this->attributes['subtype'] = "posts";
 	}
 
 	/**

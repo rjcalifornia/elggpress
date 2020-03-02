@@ -8,7 +8,7 @@
 //If editing a post, show the previous revisions and drafts.
 $blog = elgg_extract('entity', $vars, FALSE);
 
-if (!elgg_instanceof($blog, 'object', 'blog')) {
+if (!elgg_instanceof($blog, 'object', 'posts')) {
 	return;
 }
 
@@ -39,7 +39,7 @@ if (empty($revisions)) {
 	return;
 }
 
-$load_base_url = "blog/edit/{$blog->getGUID()}";
+$load_base_url = "posts/edit/{$blog->getGUID()}";
 
 // show the "published revision"
 $published_item = '';

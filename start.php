@@ -145,7 +145,7 @@ function elggpress_page_handler($page) {
 			$resource_vars['lower'] = elgg_extract(3, $page);
 			$resource_vars['upper'] = elgg_extract(4, $page);
 			
-			echo elgg_view_resource('blog/group', $resource_vars);
+			echo elgg_view_resource('posts/group', $resource_vars);
 			break;
 		case 'all':
 			echo elgg_view_resource('posts/all', $resource_vars);

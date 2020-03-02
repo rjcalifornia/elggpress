@@ -41,7 +41,7 @@ define(function(require) {
 			return false;
 		}
 
-		var draftURL = elgg.config.wwwroot + "action/blog/auto_save_revision";
+		var draftURL = elgg.config.wwwroot + "action/posts/auto_save_revision";
 		var postData = form.serializeArray();
 
 		// force draft status

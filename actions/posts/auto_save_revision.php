@@ -23,14 +23,14 @@ if ($title && $description) {
 
 	if ($guid) {
 		$entity = get_entity($guid);
-		if (elgg_instanceof($entity, 'object', 'blog') && $entity->canEdit()) {
+		if (elgg_instanceof($entity, 'object', 'posts') && $entity->canEdit()) {
 			$blog = $entity;
 		} else {
 			$error = elgg_echo('blog:error:post_not_found');
 		}
 	} else {
 		$blog = new ElggBlog();
-		$blog->subtype = 'blog';
+		$blog->subtype = 'posts';
 
 		// force draft and private for autosaves.
 		$blog->status = 'unsaved_draft';

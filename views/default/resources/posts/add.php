@@ -16,7 +16,7 @@ if (!$container->canWriteToContainer(0, 'object', 'posts')) {
 	forward(REFERER);
 }
 
-$params = blog_get_page_content_edit('add', $guid);
+$params = elggpress_get_page_content_edit('add', $guid);
 
 if (isset($params['sidebar'])) {
 	$params['sidebar'] .= elgg_view('elggpress/sidebar', ['page' => $page_type]);

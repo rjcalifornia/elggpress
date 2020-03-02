@@ -50,7 +50,7 @@ $old_status = $blog->status;
 $values = array(
 	'title' => '',
 	'description' => '',
-	'status' => 'draft',
+	'status' => 'published',
 	'access_id' => ACCESS_DEFAULT,
 	'comments_on' => 'On',
 	'excerpt' => '',
@@ -117,7 +117,7 @@ foreach ($values as $name => $default) {
 			// this can't be empty or saving the base entity fails
 			if (!empty($value)) {
 				$container = get_entity($value);
-				if ($container && $container->canWriteToContainer(0, 'object', 'blog')) {
+				if ($container && $container->canWriteToContainer(0, 'object', 'posts')) {
 					$values[$name] = $value;
 				} else {
 					$error = elgg_echo("blog:error:cannot_write_to_container");
@@ -181,6 +181,7 @@ if ($file->acceptUploadedFile($uploaded_file)) {
 		$file->thumbnail = $file->getIcon('small')->getFilename();
 		$file->smallthumb = $file->getIcon('medium')->getFilename();
 		$file->largethumb = $file->getIcon('large')->getFilename();
+                $file->largethumb = $file->getIcon('master')->getFilename();
 	} 
 }
 

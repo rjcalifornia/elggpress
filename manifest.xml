@@ -17,7 +17,7 @@
 	</requires>
         <requires>
                 <name>categories</name>
-		<type>enhancement</type>
+		<type>plugin</type>
 
 	</requires>
 	<activate_on_install>false</activate_on_install>

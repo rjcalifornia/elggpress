@@ -19,7 +19,7 @@ $preview_button = '';
 
 if ($vars['guid']) {
 	// add a delete button if editing
-	$delete_url = "action/blog/delete?guid={$vars['guid']}";
+	$delete_url = "action/posts/delete?guid={$vars['guid']}";
 	$delete_link = elgg_view('output/url', array(
 		'href' => $delete_url,
 		'text' => elgg_echo('delete'),

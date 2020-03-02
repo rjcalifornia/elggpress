@@ -138,10 +138,10 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
  * @param int     $revision Annotation id for revision to edit (optional)
  * @return array
  */
-function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
+function elggpress_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 //Set the form as multipart so elgg can handle the file
     $form_vars = array('enctype' => 'multipart/form-data');
-	elgg_require_js('elgg/blog/save_draft');
+	elgg_require_js('elgg/elggpress/save_draft');
 
 	$return = array(
 		'filter' => '',
@@ -150,12 +150,12 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 	$vars = array();
 	$vars['id'] = 'blog-post-edit';
 	$vars['class'] = 'elgg-form-alt';
-
+        $vars['enctype'] = 'multipart/form-data';
 	$sidebar = '';
 	if ($page == 'edit') {
 		$blog = get_entity((int)$guid);
 
-		$title = elgg_echo('blog:edit');
+		$title = elgg_echo('elggpress:edit');
 
 		if (elgg_instanceof($blog, 'object', 'posts') && $blog->canEdit()) {
 			$vars['entity'] = $blog;
@@ -165,10 +165,10 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 			if ($revision) {
 				$revision = elgg_get_annotation_from_id((int)$revision);
 				$vars['revision'] = $revision;
-				$title .= ' ' . elgg_echo('blog:edit_revision_notice');
+				$title .= ' ' . elgg_echo('elggpress:edit_revision_notice');
 
 				if (!$revision || !($revision->entity_guid == $guid)) {
-					$content = elgg_echo('blog:error:revision_not_found');
+					$content = elgg_echo('elggpress:error:revision_not_found');
 					$return['content'] = $content;
 					$return['title'] = $title;
 					return $return;
@@ -180,18 +180,20 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 			elgg_push_breadcrumb($blog->title, $blog->getURL());
 			elgg_push_breadcrumb(elgg_echo('edit'));
 			
-			elgg_require_js('elgg/blog/save_draft');
+			elgg_require_js('elgg/elggpress/save_draft');
 
-			$content = elgg_view_form('post/save', $form_vars, $vars, $body_vars);
-			$sidebar = elgg_view('blog/sidebar/revisions', $vars);
+			$content = elgg_view_form('posts/save',$vars, $body_vars);
+                        
+			$sidebar = elgg_view('elggpress/sidebar/revisions', $vars);
+                      //  echo print_r($vars);
 		} else {
-			$content = elgg_echo('blog:error:cannot_edit_post');
+			$content = elgg_echo('elggpress:error:cannot_edit_post');
 		}
 	} else {
-		elgg_push_breadcrumb(elgg_echo('blog:add'));
+		elgg_push_breadcrumb(elgg_echo('elggpress:add'));
 		$body_vars = blog_prepare_form_vars(null);
 
-		$title = elgg_echo('blog:add');
+		$title = elgg_echo('elggpress:add');
 		$content = elgg_view_form('posts/save', $form_vars, $vars, $body_vars);
 	}
 
