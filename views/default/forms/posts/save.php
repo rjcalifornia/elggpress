@@ -103,7 +103,47 @@ Input for uploading an image. Nothing else needs to be done since most of the th
 being handled by elgg
  **/
 
-$featured_label = elgg_echo('elggpress:featured:label');
+if ($vars['guid']) {
+    $featured = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'file',
+        'category' => 'featured',
+        'owner_guid' => $vars['guid'],
+	//'full_view' => false,
+        'limit' => 1,
+	'no_results' => elgg_echo("file:none"),
+	'preload_owners' => true,
+	'preload_containers' => true,
+	'distinct' => false,
+));
+   
+
+//echo     print_r($featured);
+                 foreach ($featured as $f) {
+                 $file = get_entity($f->guid);
+
+                 // $image_url = $file->getIconURL('large');
+               //   $image_url = elgg_format_url($image_url);
+                  $download_url = elgg_get_download_url($file);
+                  
+                  $current_label = '<label for="featured_image">' . elgg_echo('elggpress:featured:current') . '</label>';
+                  $current_featured=   '<div><a href="' . $download_url .'" class="elgg-lightbox-photo">
+                    <img src="' . $download_url . '" class="img-fluid" width="128">
+                        </a></div>';
+                 
+                  
+//echo $download_url;
+                 }
+                 
+                    
+}
+if ($vars['guid']) {
+$featured_label = elgg_echo('elggpress:featured:replace');
+}
+else
+{
+    $featured_label = elgg_echo('elggpress:featured:label');
+}
 $featured_image = elgg_view('input/file', array(
         'name' => 'featured_image',
         'label' => 'Select an image to upload',
@@ -141,7 +181,8 @@ $draft_warning
 	<label for="blog_excerpt">$excerpt_label</label>
 	$excerpt_input
 </div>
-        
+      $current_label
+      $current_featured  
         <div>
 	<label for="featured_image">$featured_label</label>
 	$featured_image

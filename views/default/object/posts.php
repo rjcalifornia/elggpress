@@ -56,11 +56,54 @@ if (!elgg_in_context('widgets')) {
 }
 
 if ($full) {
+    
+    $featured = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'file',
+        'category' => 'featured',
+        'owner_guid' => $blog->guid,
+	//'full_view' => false,
+        'limit' => 1,
+	'no_results' => elgg_echo("file:none"),
+	'preload_owners' => true,
+	'preload_containers' => true,
+	'distinct' => false,
+));
+    
+    foreach ($featured as $f) {
+                 $file = get_entity($f->guid);
 
-	$body = elgg_view('output/longtext', array(
+                 // $image_url = $file->getIconURL('large');
+               //   $image_url = elgg_format_url($image_url);
+                  $download_url = elgg_get_download_url($file);
+             
+                  
+$current_featured = <<<___HTML
+<center>
+    <div>
+       
+            <img src="$download_url" class="img-fluid">
+       
+    </div>
+</center>
+___HTML;
+                          
+                 
+                  
+//echo $download_url;
+                 }
+$body =  elgg_view('output/longtext', array(
+		'value' => $current_featured,
+		'class' => 'blog-post',));
+
+
+
+	$body.= elgg_view('output/longtext', array(
 		'value' => $blog->description,
 		'class' => 'blog-post',
 	));
+
+
 
 	$params = array(
 		'entity' => $blog,
@@ -75,6 +118,7 @@ if ($full) {
 		'entity' => $blog,
 		'summary' => $summary,
 		'icon' => $owner_icon,
+                'test' => $test,
 		'body' => $body,
 	));
 

@@ -63,15 +63,19 @@ $required = array('title', 'description');
 
 $uploaded_files = elgg_get_uploaded_files('featured_image');
 if (!$uploaded_files) {
+    if (!$guid) {
         register_error("No file was uploaded");
         forward(REFERER);
+    }
 }
 
+if ($uploaded_files) {
 $uploaded_file = array_shift($uploaded_files);
 if (!$uploaded_file->isValid()) {
         $error = elgg_get_friendly_upload_error($uploaded_file->getError());
         register_error($error);
         forward(REFERER);
+}
 }
 /*
 $supported_mimes = [
@@ -163,7 +167,8 @@ if (!$error) {
 		// no longer a brand new post.
 		$blog->deleteMetadata('new_post');
                 
-                                
+if($uploaded_file)  
+{
 $file = new ElggFile();
 $file->title = $file->getFilename();
 $file->subtype = "file";
@@ -184,6 +189,7 @@ if ($file->acceptUploadedFile($uploaded_file)) {
                 $file->largethumb = $file->getIcon('master')->getFilename();
 	} 
 }
+        }
 
 		// if this was an edit, create a revision annotation
 		if (!$new_post && $revision_text) {
