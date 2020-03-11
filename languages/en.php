@@ -2,7 +2,7 @@
 return array(
 	'blog' => 'Posts',
 	'elggpress:blogs' => 'Posts',
-	'blog:revisions' => 'Revisions',
+	'elggpress:revisions' => 'Revisions',
 	'blog:archives' => 'Archives',
 	'blog:blog' => 'Posts',
 	'item:object:blog' => 'Posts',
@@ -11,6 +11,8 @@ return array(
 	'elggpress:title:all_blogs' => 'All site posts',
 	'blog:title:friends' => 'Guests\' posts',
         'elggpress:featured:label' => 'Featured image',
+        'elggpress:featured:current' => 'Current featured image:',
+        'elggpress:featured:replace' => 'Change featured image',
 
 	'blog:group' => 'Group blog',
 	'blog:enableblog' => 'Enable group blog',
@@ -20,9 +22,10 @@ return array(
 	'elggpress:add' => 'Add a post',
         'posts:add' => 'Add a post',
 	'elggpress:edit' => 'Edit a post',
-	'blog:excerpt' => 'Excerpt',
-	'blog:body' => 'Body',
-	'blog:save_status' => 'Last saved: ',
+	'elggpress:excerpt' => 'Excerpt',
+	'elggpress:body' => 'Body',
+	'elggpress:save_status' => 'Last saved: ',
+        'elggpress:edit:post' => 'Edit post',
 	
 	'blog:revision' => 'Revision',
 	'blog:auto_saved_revision' => 'Auto Saved Revision',

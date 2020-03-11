@@ -50,21 +50,21 @@ $title_input = elgg_view('input/text', array(
 	'value' => $vars['title']
 ));
 
-$excerpt_label = elgg_echo('blog:excerpt');
+$excerpt_label = elgg_echo('elggpress:excerpt');
 $excerpt_input = elgg_view('input/text', array(
 	'name' => 'excerpt',
 	'id' => 'blog_excerpt',
 	'value' => elgg_html_decode($vars['excerpt'])
 ));
 
-$body_label = elgg_echo('blog:body');
+$body_label = elgg_echo('elggpress:body');
 $body_input = elgg_view('input/longtext', array(
 	'name' => 'description',
 	'id' => 'blog_description',
 	'value' => $vars['description']
 ));
 
-$save_status = elgg_echo('blog:save_status');
+$save_status = elgg_echo('elggpress:save_status');
 if ($vars['guid']) {
 	$entity = get_entity($vars['guid']);
 	$saved = date('F j, Y @ H:i', $entity->time_created);
@@ -117,23 +117,16 @@ if ($vars['guid']) {
 	'distinct' => false,
 ));
    
-
-//echo     print_r($featured);
                  foreach ($featured as $f) {
                  $file = get_entity($f->guid);
 
-                 // $image_url = $file->getIconURL('large');
-               //   $image_url = elgg_format_url($image_url);
                   $download_url = elgg_get_download_url($file);
                   
                   $current_label = '<label for="featured_image">' . elgg_echo('elggpress:featured:current') . '</label>';
                   $current_featured=   '<div><a href="' . $download_url .'" class="elgg-lightbox-photo">
                     <img src="' . $download_url . '" class="img-fluid" width="128">
                         </a></div>';
-                 
-                  
-//echo $download_url;
-                 }
+                }
                  
                     
 }

@@ -78,4 +78,4 @@ foreach ($revisions as $revision) {
 
 $body = elgg_format_element('ul', ['class' => 'blog-revisions'], $published_item . $revisions_list);
 
-echo elgg_view_module('aside', elgg_echo('blog:revisions'), $body);
+echo elgg_view_module('aside', elgg_echo('elggpress:revisions'), $body);
