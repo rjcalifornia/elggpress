@@ -20,6 +20,7 @@ elgg_register_event_handler('init', 'system', 'elggpress_init');
 function elggpress_init() {
 
 	elgg_register_library('elgg:elggpress', __DIR__ . '/lib/elggpress.php');
+        
 
 	// add a site navigation item
 	$item = new ElggMenuItem('posts', elgg_echo('elggpress:blogs'), 'posts/all');
@@ -71,6 +72,8 @@ function elggpress_init() {
 
 	// allow to be liked
 	elgg_register_plugin_hook_handler('likes:is_likable', 'object:blog', 'Elgg\Values::getTrue');
+        
+        
 }
 
 /**
