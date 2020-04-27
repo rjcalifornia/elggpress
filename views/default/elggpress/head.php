@@ -59,17 +59,17 @@ foreach ($stylesheets as $url) {
 <meta property="og:title" content="<?php echo $vars['entity']->title?>">
 <meta property="og:site_name" content="<?php echo $site->name?>">
 <meta property="og:description" content="<?php echo $vars['entity']->excerpt?>">
-<meta property="og:type" content="blog">
+<meta property="og:type" content="website">
 <?php
       foreach ($featured as $t) {
                  $file_og = get_entity($t->guid);
-
-                  $image_url = $file_og->getIcon('medium');
-                  $icon= elgg_get_inline_url($image_url);
+                 $icon= elgg_get_inline_url($file_og);
                   
                   
                   ?>
 <meta property="og:image" content="<?php echo $icon;?>">
+<meta property="og:image:height" content="480" />
+<meta property="og:image:width" content="320" />
 <?php
 }
 ?>

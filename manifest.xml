@@ -20,5 +20,10 @@
 		<type>plugin</type>
 
 	</requires>
+         <requires>
+                <name>file</name>
+		<type>plugin</type>
+
+	</requires>
 	<activate_on_install>false</activate_on_install>
 </plugin_manifest>

@@ -180,14 +180,15 @@ $file->access_id = 2;
 //$file->largethumb = $file->getIcon('large')->getFilename();
 if ($file->acceptUploadedFile($uploaded_file)) {
         $guid = $file->save(); 
-        $file->save();
-        
-        if ($guid && ($file->getSimpleType() === 'image') && $file->saveIconFromElggFile($file)) {
-		$file->thumbnail = $file->getIcon('small')->getFilename();
+        $file->thumbnail = $file->getIcon('small')->getFilename();
 		$file->smallthumb = $file->getIcon('medium')->getFilename();
 		$file->largethumb = $file->getIcon('large')->getFilename();
                 $file->largethumb = $file->getIcon('master')->getFilename();
-	} 
+        $file->save();
+        
+        
+		
+	
 }
         }
 
