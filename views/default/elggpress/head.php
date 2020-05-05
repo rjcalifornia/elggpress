@@ -9,7 +9,7 @@
  * @uses $vars['links'] Array of links
  */
 global $page_entity;
-var_dump($page_entity);
+//var_dump($page_entity);
 
 $entity = get_entity($page_entity->guid);
 
