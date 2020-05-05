@@ -73,6 +73,8 @@ function elggpress_init() {
 	// allow to be liked
 	elgg_register_plugin_hook_handler('likes:is_likable', 'object:blog', 'Elgg\Values::getTrue');
         
+        elgg_extend_view('object/posts', 'theme/page_entity', 400);
+
         
 }
 
